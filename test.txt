@@ -1,3 +1,4 @@
 This is test data for test_CloudElement branch!
 Line 2: Testing Git HTTP protocol
 Line 3: Success!
+Testing push via IS proxy
