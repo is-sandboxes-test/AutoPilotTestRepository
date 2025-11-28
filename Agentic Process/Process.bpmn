@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:uipath="http://uipath.org/schema/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="x-uipath-initial-diagram" targetNamespace="http://www.omg.org/spec/BPMN/20100524/MODEL" exporter="UiPath Studio Web (https://uipath.com)" exporterVersion="f5f00706">
+  <bpmn:process id="Process_1" name="Process" isExecutable="false">
+    <bpmn:extensionElements>
+      <uipath:variables version="v1">
+        <uipath:inputOutput id="response" name="response" type="file" elementId="Activity_rgVDCg"><![CDATA[{"$schema":"http://json-schema.org/draft-07/schema#","type":"object","properties":{"ID":{"type":"string","description":"Orchestrator attachment key"},"FullName":{"type":"string","description":"File name"},"MimeType":{"type":"string","description":"The MIME type of the content, such as application/json or image/png"},"Metadata":{"type":"object","description":"Dictionary<string, string> of metadata","additionalProperties":{"type":"string"}}},"required":["ID"],"x-uipath-resource-kind":"JobAttachment"}]]></uipath:inputOutput>
+      </uipath:variables>
+      <uipath:bindings version="v1">
+        <uipath:binding id="by0Uu1ESo" name="uipath-google-gmail connection" type="string" default="a802b5cf-29c0-4553-a60d-71e8a9eda7c3" resource="Connection" resourceKey="a802b5cf-29c0-4553-a60d-71e8a9eda7c3" propertyAttribute="ConnectionId" />
+        <uipath:binding id="bsMZsY6uP" name="FolderKey" type="string" default="522d8177-1c2d-49af-b5bf-42230b34e3cd" resource="Connection" resourceKey="a802b5cf-29c0-4553-a60d-71e8a9eda7c3" propertyAttribute="folderKey" />
+      </uipath:bindings>
+      <uipath:migrationVersion version="7" />
+    </bpmn:extensionElements>
+    <bpmn:startEvent id="Event_start" name="Start event">
+      <bpmn:extensionElements>
+        <uipath:entryPointId value="14ef6db5-49b5-4937-aa90-6946e68518dc" />
+      </bpmn:extensionElements>
+      <bpmn:outgoing>edge_Z8fLSh</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sendTask id="Activity_rgVDCg" name="Download Email">
+      <bpmn:extensionElements>
+        <uipath:activity version="v1">
+          <uipath:type value="Intsvc.ActivityExecution" version="v1" />
+          <uipath:context>
+            <uipath:input name="connectorKey" type="string" value="uipath-google-gmail" />
+            <uipath:input name="connection" type="string" value="=bindings.by0Uu1ESo" />
+            <uipath:input name="folderKey" type="string" value="=bindings.bsMZsY6uP" />
+            <uipath:input name="resourceKey" type="string" value="a802b5cf-29c0-4553-a60d-71e8a9eda7c3" />
+            <uipath:input name="operation" type="string" value="DownloadEmail" />
+            <uipath:input name="objectName" type="string" value="DownloadEmail" />
+            <uipath:input name="method" type="string" value="GETBYID" />
+            <uipath:input name="path" type="string" value="/DownloadEmail" />
+            <uipath:input name="metadata" type="json"><![CDATA[{"designTimeMetadata":{"connectorLogoUrl":"https://staging.uipath.com/elements_/scaleunit_/4a9b6040-645f-4006-a000-829794b794d4/v3/element/elements/uipath-google-gmail/image","activityDisplayName":"Download Email","activityDescription":"Download an email with its content","activityConfig":{"isCurated":true,"operation":null}},"metadataState":{"jsonSchema":{"$schema":"http://json-schema.org/draft-07/schema#","type":"object","properties":{"Response":{"title":"Response","$ref":"#/definitions/Response"}},"definitions":{"Response":{"type":"object","properties":{}}}}},"telemetryData":{"operationType":"Retrieve","objectName":"DownloadEmail","objectDisplayName":"Download Email","connectorKey":"uipath-google-gmail","connectorName":"Gmail","primaryKeyName":""},"inputMetadata":{},"errorState":{"hasError":false}}]]></uipath:input>
+          </uipath:context>
+          <uipath:input name="id" type="string" value="3214234234" target="query" />
+          <uipath:output name="response" type="file" source="=response" var="response" target="=orchestrator.JobAttachments" />
+        </uipath:activity>
+      </bpmn:extensionElements>
+      <bpmn:incoming>edge_Z8fLSh</bpmn:incoming>
+      <bpmn:outgoing>edge_Activity_rgVDCg-Event_KHxRNh</bpmn:outgoing>
+    </bpmn:sendTask>
+    <bpmn:endEvent id="Event_KHxRNh">
+      <bpmn:incoming>edge_Activity_rgVDCg-Event_KHxRNh</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="edge_Z8fLSh" sourceRef="Event_start" targetRef="Activity_rgVDCg" />
+    <bpmn:sequenceFlow id="edge_Activity_rgVDCg-Event_KHxRNh" sourceRef="Activity_rgVDCg" targetRef="Event_KHxRNh" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_1">
+      <bpmndi:BPMNShape id="S_Event_start" bpmnElement="Event_start">
+        <dc:Bounds x="260" y="200" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="260" y="241" width="36" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="S_Activity_rgVDCg" bpmnElement="Activity_rgVDCg">
+        <dc:Bounds x="315.4565734863281" y="178" width="100" height="80" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="315.4565734863281" y="263" width="100" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="S_Event_KHxRNh" bpmnElement="Event_KHxRNh">
+        <dc:Bounds x="465.4565734863281" y="200" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="465.4565734863281" y="241" width="36" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="BPMNEdge_edge_Z8fLSh" bpmnElement="edge_Z8fLSh">
+        <di:waypoint x="296" y="218" />
+        <di:waypoint x="315" y="218" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_edge_Activity_rgVDCg-Event_KHxRNh" bpmnElement="edge_Activity_rgVDCg-Event_KHxRNh">
+        <di:waypoint x="415" y="218" />
+        <di:waypoint x="465" y="218" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
